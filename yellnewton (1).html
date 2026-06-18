@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Y.E.L.L. Newton — Youth Education Linguistics Learning</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Fraunces:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yell: #F5C800;        /* bold yellow — the name lives here */
+      --yell-light: #FFF6CC;
+      --deep: #1A1150;        /* deep violet-navy */
+      --sky: #5B8FE8;         /* playful blue */
+      --sky-light: #E8F0FD;
+      --coral: #FF6B5B;       /* warm accent */
+      --mint: #3EC9A7;
+      --white: #FFFFFF;
+      --ink: #1A1150;
+      --muted: #6B6892;
+      --radius: 18px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--yell);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--deep);
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--yell); background: var(--deep); padding: 1px 6px; border-radius: 6px; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a {
+      text-decoration: none; color: var(--deep);
+      font-weight: 700; font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--sky); }
+    .nav-cta {
+      background: var(--yell); color: var(--deep) !important;
+      padding: 8px 20px; border-radius: 50px;
+      font-weight: 900 !important;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--coral); color: var(--white) !important; transform: scale(1.04); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--deep);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 100px 5vw 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Floating letter bubbles */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      color: rgba(255,255,255,0.18);
+      pointer-events: none;
+      animation: float 6s ease-in-out infinite;
+    }
+    .bubble:nth-child(1)  { width:110px;height:110px;font-size:3.5rem;top:8%;left:4%;animation-delay:0s; background:rgba(91,143,232,0.12); color:rgba(91,143,232,0.35);}
+    .bubble:nth-child(2)  { width:80px;height:80px;font-size:2.5rem;top:18%;left:88%;animation-delay:1.2s; background:rgba(245,200,0,0.1); color:rgba(245,200,0,0.4);}
+    .bubble:nth-child(3)  { width:60px;height:60px;font-size:2rem;top:70%;left:6%;animation-delay:2.1s; background:rgba(255,107,91,0.1); color:rgba(255,107,91,0.4);}
+    .bubble:nth-child(4)  { width:90px;height:90px;font-size:3rem;top:75%;left:85%;animation-delay:0.7s; background:rgba(62,201,167,0.1); color:rgba(62,201,167,0.4);}
+    .bubble:nth-child(5)  { width:55px;height:55px;font-size:1.8rem;top:45%;left:2%;animation-delay:3s; background:rgba(245,200,0,0.1); color:rgba(245,200,0,0.3);}
+    .bubble:nth-child(6)  { width:70px;height:70px;font-size:2.2rem;top:35%;left:92%;animation-delay:1.8s; background:rgba(255,107,91,0.1); color:rgba(255,107,91,0.35);}
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50%       { transform: translateY(-18px) rotate(3deg); }
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--yell);
+      color: var(--deep);
+      font-size: 0.8rem; font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 16px; border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .hero-title .accent { color: var(--yell); }
+    .hero-title .line2 { display: block; font-style: italic; color: var(--sky); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: rgba(255,255,255,0.75);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      background: var(--yell);
+      color: var(--deep);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900; font-size: 1rem;
+      padding: 14px 32px; border-radius: 50px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: transform 0.15s, background 0.2s;
+    }
+    .btn-primary:hover { transform: scale(1.05); background: #f9d400; }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      padding: 14px 32px; border-radius: 50px;
+      text-decoration: none; border: 2px solid rgba(255,255,255,0.4);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.4); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hero-scroll::after {
+      content: '';
+      display: block; width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 80px 5vw; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--sky); margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900; line-height: 1.1;
+      color: var(--deep);
+      margin-bottom: 1rem;
+    }
+
+    /* ── MISSION ── */
+    #mission {
+      background: var(--yell-light);
+    }
+    .mission-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .mission-text p {
+      color: var(--muted);
+      line-height: 1.8; font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    .mission-highlight {
+      background: var(--deep); color: var(--yell);
+      font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; font-style: italic;
+      padding: 24px 28px; border-radius: var(--radius);
+      line-height: 1.4;
+    }
+
+    /* Phoneme cards */
+    .phoneme-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    }
+    .phoneme-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 18px 12px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(26,17,80,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .phoneme-card:hover { transform: translateY(-4px); box-shadow: 0 6px 24px rgba(26,17,80,0.14); }
+    .phoneme-card .ph {
+      font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 900;
+      color: var(--deep);
+    }
+    .phoneme-card .word { font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-top: 4px; }
+    .phoneme-card .example { font-size: 0.72rem; color: #bbb; }
+
+    /* ── PROGRAMS ── */
+    #programs { background: var(--white); }
+    .programs-inner { max-width: 1100px; margin: 0 auto; }
+    .programs-header { text-align: center; margin-bottom: 3rem; }
+    .cards-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .prog-card {
+      background: var(--sky-light);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      position: relative; overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .prog-card:hover { transform: translateY(-6px); }
+    .prog-card:nth-child(2) { background: #FFF0EE; }
+    .prog-card:nth-child(3) { background: #EDFAF5; }
+    .prog-icon {
+      font-size: 2.5rem; margin-bottom: 1rem;
+    }
+    .prog-card h3 {
+      font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 900;
+      color: var(--deep); margin-bottom: 0.5rem;
+    }
+    .prog-card p { color: var(--muted); line-height: 1.7; font-size: 0.95rem; }
+    .prog-tag {
+      display: inline-block;
+      margin-top: 1.2rem;
+      background: var(--deep); color: var(--yell);
+      font-size: 0.75rem; font-weight: 900;
+      padding: 4px 14px; border-radius: 50px;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--deep);
+      color: var(--white);
+    }
+    .about-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center;
+    }
+    #about h2 { color: var(--white); }
+    #about .section-label { color: var(--yell); }
+    #about p { color: rgba(255,255,255,0.72); line-height: 1.8; font-size: 1.05rem; margin-bottom: 1rem; }
+    .coordinator {
+      font-weight: 700; color: var(--yell); font-size: 0.9rem;
+    }
+    .about-visual {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .stat-box {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 28px 20px; text-align: center;
+    }
+    .stat-box .num {
+      font-family: 'Fraunces', serif; font-size: 3rem; font-weight: 900;
+      color: var(--yell); line-height: 1;
+    }
+    .stat-box .label { font-size: 0.85rem; color: rgba(255,255,255,0.55); margin-top: 6px; }
+    .stat-box.accent-green { background: rgba(62,201,167,0.12); border-color: rgba(62,201,167,0.2); }
+    .stat-box.accent-coral { background: rgba(255,107,91,0.12); border-color: rgba(255,107,91,0.2); }
+    .stat-box.accent-sky { background: rgba(91,143,232,0.12); border-color: rgba(91,143,232,0.2); }
+    .stat-box.accent-green .num { color: var(--mint); }
+    .stat-box.accent-coral .num { color: var(--coral); }
+    .stat-box.accent-sky .num { color: #8FB8FF; }
+
+    /* ── SIGNUP ── */
+    #signup {
+      background: linear-gradient(135deg, var(--sky) 0%, var(--deep) 100%);
+      text-align: center;
+    }
+    #signup h2 { color: var(--white); }
+    #signup .section-label { color: var(--yell); }
+    #signup p { color: rgba(255,255,255,0.75); max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
+    .signup-form {
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 500px; margin: 0 auto;
+    }
+    .signup-form input {
+      flex: 1 1 200px;
+      padding: 14px 20px; border-radius: 50px; border: none;
+      font-family: 'Nunito', sans-serif; font-size: 1rem;
+      outline: none;
+    }
+    .signup-form input:focus { box-shadow: 0 0 0 3px var(--yell); }
+    .signup-note { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #110B3A;
+      color: rgba(255,255,255,0.6);
+      padding: 48px 5vw 32px;
+      font-size: 0.9rem;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between;
+    }
+    .footer-brand .nav-logo { font-size: 1.3rem; margin-bottom: 12px; }
+    .footer-brand p { line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { color: var(--white); font-weight: 900; margin-bottom: 12px; }
+    .footer-col a { display: block; color: rgba(255,255,255,0.6); text-decoration: none; margin-bottom: 8px; }
+    .footer-col a:hover { color: var(--yell); }
+    .footer-bottom {
+      max-width: 1100px; margin: 32px auto 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
+      font-size: 0.8rem;
+    }
+    .social-links { display: flex; gap: 12px; }
+    .social-links a {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .social-links a:hover { background: var(--yell); color: var(--deep); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .mission-inner, .about-inner { grid-template-columns: 1fr; }
+      .about-visual { grid-template-columns: repeat(2, 1fr); }
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>Y</span>.E.L.L. Newton</div>
+  <ul>
+    <li><a href="#mission">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#about">Our Team</a></li>
+    <li><a href="#signup" class="nav-cta">Join a Class</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="bubble">Y</div>
+  <div class="bubble">E</div>
+  <div class="bubble">L</div>
+  <div class="bubble">L</div>
+  <div class="bubble">?</div>
+  <div class="bubble">!</div>
+
+  <div class="hero-eyebrow">Newton, MA · Free Classes · Open to All</div>
+  <h1 class="hero-title">
+    <span class="accent">Young voices</span><br>
+    <span class="line2">deserve to be heard.</span>
+  </h1>
+  <p class="hero-sub">
+    Y.E.L.L. is a free youth linguistics program run by high school students who love language and love helping others learn English phonetics, reading, and communication.
+  </p>
+  <div class="hero-buttons">
+    <a href="#signup" class="btn-primary">Sign Up for a Free Class</a>
+    <a href="#programs" class="btn-outline">Explore What We Do</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="mission-inner">
+    <div class="mission-text">
+      <span class="section-label">Our Mission</span>
+      <h2>Language learning should feel like an adventure.</h2>
+      <p>
+        Y.E.L.L. (Youth Education Linguistics Learning) creates a vibrant space where kids who are learning English — or for whom it isn't a first language — can build real confidence in communication.
+      </p>
+      <p>
+        We specialize in phonetics and reading support, turning tricky sounds into predictable patterns and turning "I can't say that" into "listen to me now."
+      </p>
+      <div class="mission-highlight">
+        "We make learning fun, build confidence, and help every student discover the joy and power of communication."
+      </div>
+    </div>
+
+    <div class="phoneme-grid">
+      <div class="phoneme-card"><div class="ph">æ</div><div class="word">cat</div><div class="example">/kæt/</div></div>
+      <div class="phoneme-card"><div class="ph">θ</div><div class="word">think</div><div class="example">/θɪŋk/</div></div>
+      <div class="phoneme-card"><div class="ph">ʃ</div><div class="word">ship</div><div class="example">/ʃɪp/</div></div>
+      <div class="phoneme-card"><div class="ph">ŋ</div><div class="word">sing</div><div class="example">/sɪŋ/</div></div>
+      <div class="phoneme-card"><div class="ph">dʒ</div><div class="word">jump</div><div class="example">/dʒʌmp/</div></div>
+      <div class="phoneme-card"><div class="ph">ɛ</div><div class="word">bed</div><div class="example">/bɛd/</div></div>
+      <div class="phoneme-card"><div class="ph">aɪ</div><div class="word">time</div><div class="example">/taɪm/</div></div>
+      <div class="phoneme-card"><div class="ph">ð</div><div class="word">this</div><div class="example">/ðɪs/</div></div>
+      <div class="phoneme-card"><div class="ph">oʊ</div><div class="word">go</div><div class="example">/goʊ/</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="programs-inner">
+    <div class="programs-header">
+      <span class="section-label">What We Offer</span>
+      <h2>Our Programs</h2>
+      <p style="color:var(--muted);max-width:520px;margin:0 auto;line-height:1.7;">
+        All classes are free, welcoming, and designed for kids of all backgrounds learning English.
+      </p>
+    </div>
+    <div class="cards-row">
+      <div class="prog-card">
+        <div class="prog-icon">🔤</div>
+        <h3>Phonetics Foundations</h3>
+        <p>We break down English sounds into clear, learnable patterns. Kids practice vowels, consonants, and blends through games and activities that make phonetics click.</p>
+        <span class="prog-tag">All ages</span>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">📖</div>
+        <h3>Reading & Fluency</h3>
+        <p>From sounding out words to reading sentences with expression, this program builds the reading confidence that carries into every subject at school.</p>
+        <span class="prog-tag">Elementary focus</span>
+      </div>
+      <div class="prog-card">
+        <div class="prog-icon">🗣️</div>
+        <h3>Conversation & Confidence</h3>
+        <p>Speaking is the hardest part. We create low-pressure practice conversations so students get real reps in a kind, supportive environment.</p>
+        <span class="prog-tag">All levels</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div>
+      <span class="section-label">Who We Are</span>
+      <h2>Run by students, for students.</h2>
+      <p>
+        Y.E.L.L. is organized and taught entirely by high school students from Newton who are passionate about the English language and about making a real difference in their community.
+      </p>
+      <p>
+        We understand what it's like to be in a classroom where language feels like a wall instead of a door. That's exactly why we do this — to help younger kids climb over it and find their voice.
+      </p>
+      <p class="coordinator">Eva Morgan · Program Coordinator</p>
+      <p>
+        <a href="mailto:yellnewton@gmail.com" style="color:rgba(255,255,255,0.6);text-decoration:none;">yellnewton@gmail.com</a>
+      </p>
+    </div>
+    <div class="about-visual">
+      <div class="stat-box">
+        <div class="num">Free</div>
+        <div class="label">All classes, always</div>
+      </div>
+      <div class="stat-box accent-green">
+        <div class="num">K–8</div>
+        <div class="label">Grades served</div>
+      </div>
+      <div class="stat-box accent-coral">
+        <div class="num">Fun</div>
+        <div class="label">Guaranteed approach</div>
+      </div>
+      <div class="stat-box accent-sky">
+        <div class="num">Newton</div>
+        <div class="label">Community rooted</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNUP -->
+<section id="signup">
+  <span class="section-label">Get Started</span>
+  <h2>Register for a Free Class</h2>
+  <p>Drop your email and we'll send you our upcoming class schedule and how to register your child.</p>
+  <div class="signup-form">
+    <input type="email" placeholder="Your email address" aria-label="Email address" />
+    <a href="https://yellnewton.wixsite.com/yellnewton/event-list" class="btn-primary" target="_blank" rel="noopener">See Classes →</a>
+  </div>
+  <p class="signup-note">Free, no spam. Just class updates for the Newton community.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo"><span>Y</span>.E.L.L. Newton</div>
+      <p>Youth Education Linguistics Learning — a free phonetics and English language program for kids in Newton, MA, run by high school students.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <a href="#mission">Our Mission</a>
+      <a href="#programs">Programs</a>
+      <a href="#about">Who We Are</a>
+      <a href="#signup">Register</a>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="https://www.instagram.com/yellnewton/" target="_blank">Instagram @yellnewton</a>
+      <a href="mailto:yellnewton@gmail.com">yellnewton@gmail.com</a>
+      <div class="social-links" style="margin-top:12px;">
+        <a href="https://www.instagram.com/yellnewton/" target="_blank" title="Instagram">📸</a>
+        <a href="http://www.facebook.com" target="_blank" title="Facebook">f</a>
+        <a href="mailto:yellnewton@gmail.com" title="Email">✉</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Y.E.L.L. Newton · Empowering youth through language.</span>
+    <span>Newton, Massachusetts</span>
+  </div>
+</footer>
+
+</body>
+</html>
